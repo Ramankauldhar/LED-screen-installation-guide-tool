@@ -13,12 +13,19 @@ function MainPage() {
     const [installationType, setInstallationType] = useState("Niche"); // Niche or Flat Wall
     const [floorDistance, setFloorDistance] = useState(50); // Default floor distance in inches
     const [nicheDepth, setNicheDepth] = useState(0.5); // Default niche depth in inches
+    const [selectedScreen, setSelectedScreen] = useState(""); // Current screen model
+    const [screenDimensions, setScreenDimensions] = useState({
+        height: "",
+        width: "",
+        floorLine: floorDistance, // Initialize with default floor distance
+      });
+    
 
     useEffect(() => {
         // Function to load and parse the Excel file
         const loadExcelFile = async () => {
           try {
-            const response = await fetch("PDF Builder.xlsx"); // Path to the file
+            const response = await fetch("PDF Builder.xlsx"); 
             const arrayBuffer = await response.arrayBuffer();
             const workbook = XLSX.read(arrayBuffer, { type: "array" });
     
@@ -29,6 +36,8 @@ function MainPage() {
             const receptacleBoxSheet = XLSX.utils.sheet_to_json(workbook.Sheets["Receptacle Box"]);
     
             const screenModels = screenMfrSheet.map((row) => row["Screen MFR"]);
+            // Select the first screen by default
+            const firstScreen = screenMfrSheet[0]; 
     
             // Update dropdown data and set default screen and dimensions
             setDropdownData({
@@ -37,14 +46,52 @@ function MainPage() {
               mount: mountsSheet.map((row) => row["MFG. PART"]),
               receptacleBox: receptacleBoxSheet.map((row) => row["MFG. PART"]),
             });
-    
+
+            if (firstScreen) {
+                setSelectedScreen(firstScreen["Screen MFR"]);
+                setScreenDimensions({
+                  height: firstScreen["Height"] || "",
+                  width: firstScreen["Width"] || "",
+                  floorLine: floorDistance,
+                });
+            }
           } catch (error) {
             console.error("Error loading Excel file:", error);
           }
         };
       
         loadExcelFile();
-    }, []);
+    }, [floorDistance]);
+
+    // Update screen dimensions based on the selected screen
+    const handleScreenChange = (event) => {
+        const selected = event.target.value;
+        setSelectedScreen(selected);
+
+        // Load the Excel data again to fetch dimensions for the selected screen
+        const loadScreenDimensions = async () => {
+            try {
+                 const response = await fetch("PDF Builder.xlsx");
+                 const arrayBuffer = await response.arrayBuffer();
+                 const workbook = XLSX.read(arrayBuffer, { type: "array" });
+                 const screenMfrSheet = XLSX.utils.sheet_to_json(workbook.Sheets["Screen MFR"]);
+
+                // Find the row with the matching screen model
+                 const screenData = screenMfrSheet.find((row) => row["Screen MFR"] === selected);
+                 if (screenData) {
+                    setScreenDimensions({
+                         height: screenData["Height"] || "",
+                         width: screenData["Width"] || "",
+                         floorLine: floorDistance, // Use the current floor distance
+                    });
+                }
+            } catch (error) {
+            console.error("Error loading screen dimensions:", error);
+             }
+        };
+        loadScreenDimensions(); 
+    };
+
     // Handlers for updating state
     const handleOrientationToggle = () => {
           setOrientation((prev) => (prev === "Horizontal" ? "Vertical" : "Horizontal"));
@@ -63,7 +110,28 @@ return (
 <>
     <div className="mainContainer">
         <div className="leftContainer">
-
+             <div className="dimensions-table">
+                {/* Screen Dimensions Table */}
+                <table>
+                    <thead>
+                         <h3>Screen Dimensions</h3>
+                    </thead>
+                    <tbody>
+                         <tr>
+                             <th>Height</th>
+                             <td>{screenDimensions.height || "N/A"}</td>
+                         </tr>
+                         <tr>
+                             <th>Width</th>
+                             <td>{screenDimensions.width  || "N/A"}</td>
+                         </tr>
+                         <tr>
+                             <th>Floor Line</th>
+                             <td>{floorDistance}"</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div className="rightContainer">
              <div className="configFirstSection">
@@ -72,7 +140,7 @@ return (
                     <div className="item">
                         <label>Screen</label>
                         <br />
-                        <select>
+                        <select onChange={handleScreenChange}>
                              {dropdownData.screenModel.map((item, index) => (
                              <option key={index} value={item}>
                                   {item}
