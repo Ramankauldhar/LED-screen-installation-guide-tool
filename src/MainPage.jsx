@@ -18,8 +18,14 @@ function MainPage() {
         height: "",
         width: "",
         floorLine: floorDistance, // Initialize with default floor distance
-      });
-    
+    });
+    const [nicheDimensions, setNicheDimensions] = useState({
+        height: 0,
+        width: 0,
+        depth: 0,
+    });
+    const [mediaPlayerDepth, setMediaPlayerDepth] = useState(0);
+    const [mountDepth, setMountDepth] = useState(0);
 
     useEffect(() => {
         // Function to load and parse the Excel file
@@ -63,6 +69,22 @@ function MainPage() {
         loadExcelFile();
     }, [floorDistance]);
 
+    useEffect(() => {
+        // Calculate niche value dynamically
+        const calculateNicheDimensions = () => {
+            const { height, width, screenDepth } = screenDimensions;
+            const depthVariance = width <= 55 ? 1.5 : 2;
+            const calculatedNicheDimensions = {
+                height: height + 2 * depthVariance,
+                width: width + 2 * depthVariance,
+                depth: screenDepth + Math.max(mediaPlayerDepth, mountDepth) + depthVariance,
+            };
+            setNicheDimensions(calculatedNicheDimensions);
+        };
+
+        calculateNicheDimensions();
+    }, [screenDimensions, mediaPlayerDepth, mountDepth]);
+
     // Update screen dimensions based on the selected screen
     const handleScreenChange = (event) => {
         const selected = event.target.value;
@@ -82,7 +104,8 @@ function MainPage() {
                     setScreenDimensions({
                          height: screenData["Height"] || "",
                          width: screenData["Width"] || "",
-                         floorLine: floorDistance, // Use the current floor distance
+                         floorLine: floorDistance,
+                         screenDepth: screenData["Depth"]
                     });
                 }
             } catch (error) {
@@ -105,7 +128,8 @@ function MainPage() {
     };
     const handleNicheDepthChange = (event) => {
         setNicheDepth(event.target.value);
-      };
+    };
+
 return (
 <>
     <div className="mainContainer">
@@ -119,16 +143,35 @@ return (
                     <tbody>
                          <tr>
                              <th>Height</th>
-                             <td>{screenDimensions.height || "N/A"}</td>
+                             <td>{screenDimensions.height || "N/A"}"</td>
                          </tr>
                          <tr>
                              <th>Width</th>
-                             <td>{screenDimensions.width  || "N/A"}</td>
+                             <td>{screenDimensions.width  || "N/A"}"</td>
                          </tr>
                          <tr>
                              <th>Floor Line</th>
                              <td>{floorDistance}"</td>
                          </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <h3>Niche Dimensions</h3>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Height</th>
+                            <td>{nicheDimensions.height}"</td>
+                        </tr>
+                        <tr>
+                            <th>Width</th>
+                            <td>{nicheDimensions.width}"</td>
+                        </tr>
+                        <tr>
+                            <th>Depth</th>
+                            <td>{nicheDimensions.depth}"</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
