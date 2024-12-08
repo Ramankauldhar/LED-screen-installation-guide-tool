@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Stage, Layer, Rect, Text, Line, Arrow } from 'react-konva';
 
 const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHeight }) => {
-  const [stageWidth] = useState(800); // Canvas width
-  const [stageHeight] = useState(800); // Canvas height
+  const stageWidth=700;
+  const stageHeight=600;
   const scale = 10; // Scaling factor for dimensions
 
   // Calculate the center of the screen relative to the canvas

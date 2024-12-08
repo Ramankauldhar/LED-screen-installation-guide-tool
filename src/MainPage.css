@@ -35,7 +35,10 @@ h2,h3{
 }
 .drawingSection{
     margin-right: 10px;
-    width: 60%;
+    width:60%;
+}
+.drawingSection .drawing{
+    overflow: scroll;
 }
 .centerSection{
     display: block;
@@ -44,13 +47,13 @@ h2,h3{
 .dimensions-table{
     display: flex;
     height: auto;
-    width: 100%;
+    width: auto;
 }
 .dimensions-table table{
     border: 1px solid black;
     height: fit-content;
     margin: 4px 0;
-    width: 100%;
+    width: 50%;
 }
 .dimensions-table table thead h3{
     padding: 5px;
@@ -205,7 +208,7 @@ h2,h3{
 
 /* Media Queries for Responsiveness */
 
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
     .mainContainer {
         flex-direction: column;
     }
@@ -231,7 +234,7 @@ h2,h3{
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     .mainContainer{
         display: block;
     }
@@ -265,8 +268,15 @@ h2,h3{
         height: 3rem;
     }
 
+    .centerSection{
+        margin: 0 10%;
+    }
     .NoteSection {
+        margin-top: 10px;
         flex-direction: column;
+    }
+    .leftNote,.rightNote{
+        width:100%;
     }
 }
 

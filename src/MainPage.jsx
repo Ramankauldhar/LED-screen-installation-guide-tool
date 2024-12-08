@@ -150,7 +150,7 @@ return (
     <div className="mainContainer">
         <div className="leftContainer">
              <div className="drawingSection">
-                <Drawing
+                <Drawing className="drawing"
                      screenWidth={screenDimensions.width}
                      screenHeight={screenDimensions.height}
                      floorDistance={screenDimensions.floorLine}
