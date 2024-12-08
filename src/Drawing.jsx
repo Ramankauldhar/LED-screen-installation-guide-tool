@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stage, Layer, Rect, Text, Line, Arrow } from 'react-konva';
 
 const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHeight }) => {
-  const stageWidth=700;
+  const stageWidth=1100;
   const stageHeight=600;
   const scale = 10; // Scaling factor for dimensions
 

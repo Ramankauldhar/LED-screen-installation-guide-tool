@@ -35,7 +35,7 @@ h2,h3{
 }
 .drawingSection{
     margin-right: 10px;
-    width:60%;
+    width:69%;
 }
 .drawingSection .drawing{
     overflow: scroll;
@@ -43,6 +43,7 @@ h2,h3{
 .centerSection{
     display: block;
     margin-right:10px;
+    width: 31%;
 }
 .dimensions-table{
     display: flex;
@@ -209,12 +210,8 @@ h2,h3{
 /* Media Queries for Responsiveness */
 
 @media (max-width: 1400px) {
-    .mainContainer {
-        flex-direction: column;
-    }
-
-    .leftContainer, .rightContainer {
-        width: 100%;
+    .leftContainer {
+        display: block;
     }
 
     .header img {
@@ -224,11 +221,14 @@ h2,h3{
     .input-group label, .input-group input {
         width: 100%;
     }
-
     .NoteSection {
+        margin-top: 10px;
         flex-direction: column;
     }
-
+    .centerSection{
+        margin: 0 10%;
+        width: 80%;
+    }
     .toggle-group button {
         width: 100%;
     }
@@ -266,14 +266,6 @@ h2,h3{
     .headerScript img {
         width: 4rem;
         height: 3rem;
-    }
-
-    .centerSection{
-        margin: 0 10%;
-    }
-    .NoteSection {
-        margin-top: 10px;
-        flex-direction: column;
     }
     .leftNote,.rightNote{
         width:100%;
