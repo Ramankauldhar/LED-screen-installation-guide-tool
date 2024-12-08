@@ -4,6 +4,7 @@ import Drawing from "./Drawing";
 import './MainPage.css';
 import signcastLogoImg from './imgs/signcast-email-logo.png';
 import revisionImg from './imgs/revisionImg.png';
+import {downloadPDF} from './downloadPdf';
 
 function MainPage() {
     const brand = "SignCast";
@@ -381,7 +382,7 @@ return (
                 </div>
             </div>
             <div className="downloadButtonSection">
-                 <button>Download</button>
+                 <button onClick={downloadPDF}>Download</button>
             </div>
         </div>
     </div>

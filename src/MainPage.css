@@ -118,6 +118,7 @@ h2,h3{
 }
 .orderTable .heading{
     background-color: rgb(227, 200, 168);
+    font-size: 500;
 }
 /*--------Congig Section ---------*/
 .configSection{
@@ -199,6 +200,7 @@ h2,h3{
     padding:4px;
     background-color: blue;
     color: white;
+    cursor: pointer;
   }
 
 /* Media Queries for Responsiveness */
