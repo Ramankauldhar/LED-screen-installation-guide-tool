@@ -53,23 +53,23 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
         />
         <Text
           x={screenStartX}
-          y={screenStartY + screenHeight * scale + 10}
+          y={screenStartY + screenHeight * scale + 7}
           text={`Screen Dimensions: ${screenWidth}" x ${screenHeight}"`}
           fontSize={14}
         />
 
         {/* Floor Line */}
         <Line
-          points={[0, floorDistance * scale, stageWidth, floorDistance * scale]}
-          stroke="orange"
+          points={[40, floorDistance * scale, stageWidth-300, floorDistance * scale]}
+          stroke="black"
           strokeWidth={1}
         />
         <Text
-          x={10}
+          x={40}
           y={floorDistance * scale +10}
           text={`Floor Line`}
           fontSize={14}
-          fill="orange"
+          fill="black"
         />
 
          {/* Center Lines */}
