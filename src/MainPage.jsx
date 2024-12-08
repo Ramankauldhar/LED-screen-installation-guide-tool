@@ -1,14 +1,20 @@
 import React, {useState, useEffect} from "react";
 import * as XLSX from "xlsx";
+import Drawing from "./Drawing";
 import './MainPage.css';
+import signcastLogoImg from './imgs/signcast-email-logo.png';
 
 function MainPage() {
+    const brand = "SignCast";
+    const department = "Installation";
+    const [date, setDate] = useState('');
+
     const [dropdownData, setDropdownData] = useState({
         screenModel: [],
         mediaPlayer: [],
         mount: [],
         receptacleBox: [],
-      });
+    });
     const [orientation, setOrientation] = useState("Horizontal"); // Horizontal or Vertical
     const [installationType, setInstallationType] = useState("Niche"); // Niche or Flat Wall
     const [floorDistance, setFloorDistance] = useState(50); // Default floor distance in inches
@@ -85,6 +91,12 @@ function MainPage() {
         calculateNicheDimensions();
     }, [screenDimensions, mediaPlayerDepth, mountDepth]);
 
+    useEffect(() => {
+        const today = new Date().toISOString().split('T')[0];
+        setDate(today);
+      }, []);
+    
+
     // Update screen dimensions based on the selected screen
     const handleScreenChange = (event) => {
         const selected = event.target.value;
@@ -132,8 +144,16 @@ function MainPage() {
 
 return (
 <>
+    <div className="header"><img src={signcastLogoImg}></img></div>
     <div className="mainContainer">
         <div className="leftContainer">
+             <Drawing
+                 screenWidth={screenDimensions.width}
+                 screenHeight={screenDimensions.height}
+                 floorDistance={screenDimensions.floorLine}
+                 nicheWidth={nicheDimensions.width}
+                 nicheHeight={nicheDimensions.height}
+             />
              <div className="dimensions-table">
                 {/* Screen Dimensions Table */}
                 <table>
@@ -177,7 +197,7 @@ return (
             </div>
         </div>
         <div className="rightContainer">
-             <div className="configFirstSection">
+             <div className="configSection">
                 <div className="items">
                     <h2>Configuration</h2>
                     <div className="item">
@@ -267,6 +287,34 @@ return (
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="descriptionSection">
+                <div className="items">
+                    <h2>Configuration</h2>
+                    <div className="item">
+                        <label>Title</label><br />
+                        <input type="text"/>
+                    </div>
+                    <div className="item">
+                        <label>Drawer</label><br />
+                        <input type="text" value={brand}/>
+                    </div>
+                    <div className="item">
+                        <label>Department</label><br />
+                        <input type="text" value={department}/>
+                    </div>
+                    <div className="item">
+                        <label>Screen Size</label><br />
+                        <input type="text"/>
+                    </div>
+                    <div className="item">
+                        <label>Date</label><br />
+                        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                    </div>
+                </div>
+            </div>
+            <div className="downloadButtonSection">
+                 <button>Download</button>
             </div>
         </div>
     </div>

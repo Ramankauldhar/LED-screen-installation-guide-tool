@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+    box-sizing: border-box;
+}
+
 h1{
     text-align: center;
 }
@@ -5,18 +12,34 @@ h2,h3{
     font-weight:500;
     font-size: 16px;
 }
+.header{
+    border-bottom: 1px solid rgb(218, 215, 215);
+}
+.header img{
+    width: 8rem;
+}
 .mainContainer{
     width: 100%;
     display: flex;
 }
 .leftContainer{
-    width:75%;
+    width:80%;
+    display: flex;
+    border: 1px solid rgb(218, 215, 215);
+    margin:10px;
 }
 .rightContainer{
-    width:25%;
+    width:20%;
+    margin: 10px;
+    margin-left: 0;
+}
+.dimensions-table{
+    display: flex;
+    height: auto;
 }
 .dimensions-table table{
     border: 1px solid black;
+    height: fit-content;
 }
 .dimensions-table table tbody{
     width:100%;
@@ -36,26 +59,28 @@ h2,h3{
     border: 1px solid black;
 }
 
-.configFirstSection{
-    padding:10px;
-    margin:10px;
+/*--------Congig Section ---------*/
+.configSection{
+    width: 100%;
 }
 .items{
     padding:10px 15px;
     border: 1px solid rgb(170, 169, 169);
-    width: fit-content;
 }
-
-.item label{
+.descriptionSection{
+    margin-top: 10px;
+}
+.item, .descriptionSection label{
     font-size: 12px;
     color: rgb(192, 189, 189);
 }
-.item select{
+.item select, .descriptionSection input{
     width: 100%;
     height: 28px;
     border: 1px solid rgb(192, 189, 189);
     color: rgb(78, 77, 77);
     margin: 4px 0px;
+    padding: 4px;
 };
 .configSecondSection{
     margin-top: 10px;
@@ -105,4 +130,12 @@ h2,h3{
     border: 1px solid black;
     border-left:none;
     box-sizing: border-box; /* Preventing padding from exceeding width */
+  }
+
+  .downloadButtonSection button{
+    width:100%;
+    margin-top: 10px;
+    padding:4px;
+    background-color: blue;
+    color: white;
   }
