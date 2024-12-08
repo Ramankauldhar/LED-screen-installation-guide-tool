@@ -3,6 +3,7 @@ import * as XLSX from "xlsx";
 import Drawing from "./Drawing";
 import './MainPage.css';
 import signcastLogoImg from './imgs/signcast-email-logo.png';
+import revisionImg from './imgs/revisionImg.png';
 
 function MainPage() {
     const brand = "SignCast";
@@ -144,57 +145,123 @@ function MainPage() {
 
 return (
 <>
-    <div className="header"><img src={signcastLogoImg}></img></div>
+    <div className="header"><img src={signcastLogoImg} alt="signcast-logo"></img></div>
     <div className="mainContainer">
         <div className="leftContainer">
-             <Drawing
-                 screenWidth={screenDimensions.width}
-                 screenHeight={screenDimensions.height}
-                 floorDistance={screenDimensions.floorLine}
-                 nicheWidth={nicheDimensions.width}
-                 nicheHeight={nicheDimensions.height}
-             />
-             <div className="dimensions-table">
-                {/* Screen Dimensions Table */}
-                <table>
-                    <thead>
-                         <h3>Screen Dimensions</h3>
-                    </thead>
-                    <tbody>
-                         <tr>
-                             <th>Height</th>
-                             <td>{screenDimensions.height || "N/A"}"</td>
-                         </tr>
-                         <tr>
-                             <th>Width</th>
-                             <td>{screenDimensions.width  || "N/A"}"</td>
-                         </tr>
-                         <tr>
-                             <th>Floor Line</th>
-                             <td>{floorDistance}"</td>
-                         </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                        <h3>Niche Dimensions</h3>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Height</th>
-                            <td>{nicheDimensions.height}"</td>
-                        </tr>
-                        <tr>
-                            <th>Width</th>
-                            <td>{nicheDimensions.width}"</td>
-                        </tr>
-                        <tr>
-                            <th>Depth</th>
-                            <td>{nicheDimensions.depth}"</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+             <div className="drawingSection">
+                <Drawing
+                     screenWidth={screenDimensions.width}
+                     screenHeight={screenDimensions.height}
+                     floorDistance={screenDimensions.floorLine}
+                     nicheWidth={nicheDimensions.width}
+                     nicheHeight={nicheDimensions.height}
+                />
+             </div>
+             <div className="centerSection">
+                <div className="dimensions-table">
+                     {/* Screen Dimensions Table */}
+                    <table>
+                        <thead>
+                             <h3>Screen Dimensions</h3>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                 <th>Height</th>
+                                 <td>{screenDimensions.height || "N/A"}"</td>
+                            </tr>
+                            <tr>
+                                 <th>Width</th>
+                                 <td>{screenDimensions.width  || "N/A"}"</td>
+                            </tr>
+                            <tr>
+                                 <th>Floor Line</th>
+                                 <td>{floorDistance}"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                             <h3>Niche Dimensions</h3>
+                        </thead>
+                        <tbody>
+                             <tr>
+                                 <th>Height</th>
+                                 <td>{nicheDimensions.height}"</td>
+                             </tr>
+                             <tr>
+                                 <th>Width</th>
+                                 <td>{nicheDimensions.width}"</td>
+                             </tr>
+                             <tr>
+                                 <th>Depth</th>
+                                 <td>{nicheDimensions.depth}"</td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="NoteSection">
+                    <div className="leftNote">
+                        <h2>Notes</h2>
+                        <p>Install recessed receptacle box with:</p>
+                        <p>2x Terminated Power Oulets</p>
+                        <p>1x Terminated Data CAT5 Ethernet Outlet</p>
+                    </div>
+                    <div className="rightNote">
+                        <table>
+                            <tr>
+                                  <th>Height</th>
+                                  <td>6.6"</td>
+                            </tr>
+                            <tr>
+                                  <th>Width</th>
+                                  <td>6.012"</td>
+                            </tr>
+                            <tr>
+                                  <th>Depth</th>
+                                  <td>3.75"</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div className="orderSection">
+                    <div className="headerScript">
+                         <img src={signcastLogoImg} alt="signcast-logo"></img>
+                         <address>361 Steelcase RD. W. #1. MARKHAM, ONTARIO PHONE: (416) 900-2233</address>
+                         <div className="despText">
+                             <label>Description</label>
+                             <p>{`${orientation} + PC In ${installationType}`}</p>
+                         </div>
+                    </div>
+                    <div className="orderTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                     <td className="heading">Drawn</td>
+                                     <td rowSpan="2" className="heading">Dimensions In Inches</td>
+                                     <td rowSpan="2"><img src={revisionImg} alt="revision-img"></img></td>
+                                     <td className="heading">{brand}</td>
+                                </tr>
+                                <tr>
+                                    <td>SignCast</td>
+                                    <td>LG 55" Touch Display</td>
+                                </tr>
+                                <tr>
+                                    <td className="heading">Date</td>
+                                    <td className="heading">Sheet</td>
+                                    <td className="heading">Revision</td>
+                                    <td className="heading">Department</td>
+                                </tr>
+                                <tr>
+                                    <td>{date}</td>
+                                    <td>1 of 1</td>
+                                    <td>00</td>
+                                    <td>{department}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+             </div>
         </div>
         <div className="rightContainer">
              <div className="configSection">
@@ -290,10 +357,10 @@ return (
             </div>
             <div className="descriptionSection">
                 <div className="items">
-                    <h2>Configuration</h2>
+                    <h2>Description</h2>
                     <div className="item">
                         <label>Title</label><br />
-                        <input type="text"/>
+                        <input type="text" value={`${orientation} + PC In ${installationType}`}/>
                     </div>
                     <div className="item">
                         <label>Drawer</label><br />
@@ -305,7 +372,7 @@ return (
                     </div>
                     <div className="item">
                         <label>Screen Size</label><br />
-                        <input type="text"/>
+                        <input type="text" value={`LG 55" Touch Display`}/>
                     </div>
                     <div className="item">
                         <label>Date</label><br />

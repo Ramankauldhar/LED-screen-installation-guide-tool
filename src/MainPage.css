@@ -9,7 +9,7 @@ h1{
     text-align: center;
 }
 h2,h3{
-    font-weight:500;
+    font-weight:600;
     font-size: 16px;
 }
 .header{
@@ -33,6 +33,13 @@ h2,h3{
     margin: 10px;
     margin-left: 0;
 }
+.drawingSection{
+    margin-right: 10px;
+}
+.centerSection{
+    display: block;
+    margin-right:10px;
+}
 .dimensions-table{
     display: flex;
     height: auto;
@@ -40,6 +47,10 @@ h2,h3{
 .dimensions-table table{
     border: 1px solid black;
     height: fit-content;
+    margin: 4px 0 4px 0;
+}
+.dimensions-table table thead h3{
+    padding: 5px;
 }
 .dimensions-table table tbody{
     width:100%;
@@ -58,7 +69,53 @@ h2,h3{
 .dimensions-table table th,td{
     border: 1px solid black;
 }
-
+.NoteSection{
+    border: 1px solid black;
+    display: flex;
+    margin-top: 8rem;
+    padding: 10px;
+}
+.rightNote, .leftNote{
+    width:50%;
+    padding: 5px;
+}
+.leftNote p{
+    font-size: 12px;
+}
+.rightNote table{
+    width:100%;
+}
+.rightNote table tr th{
+    background-color: rgb(168, 167, 167);
+    color: white;
+    border: 1px solid black;
+    font-size: 12px;
+}
+.orderSection{
+    margin-top: 10px;
+    border: 1px solid black;
+}
+.orderSection .headerScript{
+    display: flex;
+    padding: 5px;;
+}
+.headerScript img{
+    width:5rem;
+    height: 4rem;
+    padding:5px;
+}
+.headerScript address, .despText{
+    padding:5px;
+    font-size: 12px;
+}
+.despText p{
+    padding-top: 4px;
+    font-size: 8px;
+}
+.orderTable .heading{
+    background-color: rgb(227, 200, 168);
+    opacity: 1;
+}
 /*--------Congig Section ---------*/
 .configSection{
     width: 100%;
