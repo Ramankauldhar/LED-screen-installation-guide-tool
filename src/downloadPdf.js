@@ -2,7 +2,6 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 export const downloadPDF = () => {
-    // Select the section you want to export as PDF
     const content = document.querySelector(".mainContainer"); 
 
     html2canvas(content).then((canvas) => {

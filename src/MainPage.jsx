@@ -80,18 +80,22 @@ function MainPage() {
     useEffect(() => {
         // Calculate niche value dynamically
         const calculateNicheDimensions = () => {
-            const { height, width, screenDepth } = screenDimensions;
+            const { height=0, width=0, screenDepth=0 } = screenDimensions;
             const depthVariance = width <= 55 ? 1.5 : 2;
-            const calculatedNicheDimensions = {
-                height: height + 2 * depthVariance,
-                width: width + 2 * depthVariance,
-                depth: screenDepth + Math.max(mediaPlayerDepth, mountDepth) + depthVariance,
-            };
-            setNicheDimensions(calculatedNicheDimensions);
-        };
 
+            if (installationType === "Niche") {
+                const calculatedNicheDimensions = {
+                     height: height + 2 * depthVariance,
+                     width: width + 2 * depthVariance,
+                     depth: parseFloat(screenDepth + Math.max(mediaPlayerDepth, mountDepth) + depthVariance).toFixed(2),
+                };
+                setNicheDimensions(calculatedNicheDimensions);
+            } else {
+                setNicheDimensions({ height: 0, width: 0, depth: 0 });
+            }
+        };
         calculateNicheDimensions();
-    }, [screenDimensions, mediaPlayerDepth, mountDepth]);
+    }, [screenDimensions, mediaPlayerDepth, mountDepth, installationType]);
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -116,10 +120,10 @@ function MainPage() {
                  const screenData = screenMfrSheet.find((row) => row["Screen MFR"] === selected);
                  if (screenData) {
                     setScreenDimensions({
-                         height: screenData["Height"] || "",
-                         width: screenData["Width"] || "",
+                         height: screenData["Height"] || 0,
+                         width: screenData["Width"] || 0,
                          floorLine: floorDistance,
-                         screenDepth: screenData["Depth"]
+                         screenDepth: screenData["Depth"] || 0,
                     });
                 }
             } catch (error) {
@@ -154,32 +158,13 @@ return (
                      screenWidth={screenDimensions.width}
                      screenHeight={screenDimensions.height}
                      floorDistance={screenDimensions.floorLine}
-                     nicheWidth={nicheDimensions.width}
-                     nicheHeight={nicheDimensions.height}
+                     nicheWidth={installationType === "Niche" ? nicheDimensions.width : null}
+                     nicheHeight={installationType === "Niche" ? nicheDimensions.height : null}
                 />
              </div>
              <div className="centerSection">
                 <div className="dimensions-table">
-                     {/* Screen Dimensions Table */}
-                    <table>
-                        <thead>
-                             <h3>Screen Dimensions</h3>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                 <th>Height</th>
-                                 <td>{screenDimensions.height || "N/A"}"</td>
-                            </tr>
-                            <tr>
-                                 <th>Width</th>
-                                 <td>{screenDimensions.width  || "N/A"}"</td>
-                            </tr>
-                            <tr>
-                                 <th>Floor Line</th>
-                                 <td>{floorDistance}"</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {/* Niche Dimensions Table */}
                     <table>
                         <thead>
                              <h3>Niche Dimensions</h3>
@@ -197,6 +182,26 @@ return (
                                  <th>Depth</th>
                                  <td>{nicheDimensions.depth}"</td>
                              </tr>
+                        </tbody>
+                    </table>
+                    {/* Screen Dimensions Table */}
+                    <table>
+                        <thead>
+                             <h3>Screen Dimensions</h3>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                 <th>Height</th>
+                                 <td>{screenDimensions.height || "N/A"}"</td>
+                            </tr>
+                            <tr>
+                                 <th>Width</th>
+                                 <td>{screenDimensions.width  || "N/A"}"</td>
+                            </tr>
+                            <tr>
+                                 <th>Floor Line</th>
+                                 <td>{floorDistance}"</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

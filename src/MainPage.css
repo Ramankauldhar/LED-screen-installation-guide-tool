@@ -213,24 +213,15 @@ h2,h3{
     .leftContainer {
         display: block;
     }
-
     .header img {
         width: 6rem;
     }
-
-    .input-group label, .input-group input {
-        width: 100%;
-    }
     .NoteSection {
         margin-top: 10px;
-        flex-direction: column;
     }
     .centerSection{
         margin: 0 10%;
         width: 80%;
-    }
-    .toggle-group button {
-        width: 100%;
     }
 }
 
@@ -238,6 +229,7 @@ h2,h3{
     .mainContainer{
         display: block;
     }
+    
     .drawingSection{
         width:100%;
     }
@@ -252,7 +244,6 @@ h2,h3{
     }
     .leftContainer {
         display: block;
-        width: 100%;
     }
     .dimensions-table table tr th, td {
         font-size: 10px;
@@ -266,9 +257,6 @@ h2,h3{
     .headerScript img {
         width: 4rem;
         height: 3rem;
-    }
-    .leftNote,.rightNote{
-        width:100%;
     }
 }
 

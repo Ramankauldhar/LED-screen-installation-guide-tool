@@ -25,21 +25,25 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
     <Stage width={stageWidth} height={stageHeight}>
       <Layer>
         {/* Draw Niche */}
-        <Rect
-          x={50}
-          y={50}
-          width={nicheWidth * scale}
-          height={nicheHeight * scale}
-          fill="white"
-          stroke="grey"
-          strokeWidth={2}
-        />
-        <Text
-          x={50}
-          y={30}
-          text={`Niche Dimensions: ${nicheWidth}" x ${nicheHeight}"`}
-          fontSize={14}
-        />
+        {nicheWidth && nicheHeight ? (
+          <>
+            <Rect
+               x={50}
+               y={50}
+               width={nicheWidth * scale}
+               height={nicheHeight * scale}
+               fill="white"
+               stroke="grey"
+               strokeWidth={2}
+            />
+            <Text
+              x={50}
+              y={30}
+              text={`Niche Dimensions: ${nicheWidth}" x ${nicheHeight}"`}
+              fontSize={14}
+            />
+          </>
+        ) : null}
 
         {/* Draw Screen */}
         <Rect
