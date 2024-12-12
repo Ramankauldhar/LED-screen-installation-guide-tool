@@ -20,7 +20,7 @@ function MainPage() {
     const [orientation, setOrientation] = useState("Horizontal"); // Horizontal or Vertical
     const [installationType, setInstallationType] = useState("Niche"); // Niche or Flat Wall
     const [floorDistance, setFloorDistance] = useState(50); // Default floor distance in inches
-    const [nicheDepth, setNicheDepth] = useState(0.5); // Default niche depth in inches
+    const [nicheDepth, setNicheDepth] = useState(1.5); // Default niche depth in inches
     const [selectedScreen, setSelectedScreen] = useState(""); // Current screen model
     const [screenDimensions, setScreenDimensions] = useState({
         height: "",

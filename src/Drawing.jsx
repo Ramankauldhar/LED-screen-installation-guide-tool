@@ -12,6 +12,10 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
   const centerX = screenStartX + (screenWidth * scale) / 2; // Center X of the screen
   const centerY = screenStartY + (screenHeight * scale) / 2; // Center Y of the screen
 
+  // Calculate niche position
+  const nicheX = screenStartX - ((nicheWidth * scale) - screenWidth * scale) / 2;
+  const nicheY = screenStartY - ((nicheHeight * scale) - screenHeight * scale) / 2;
+
    // Dimensions and position for the power outlet box
    const outletBoxWidth = 5 * scale; // Width of the power outlet box
    const outletBoxHeight = 2.5 * scale; // Height of the power outlet box
@@ -28,8 +32,8 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
         {nicheWidth && nicheHeight ? (
           <>
             <Rect
-               x={50}
-               y={50}
+               x={nicheX}
+               y={nicheY}
                width={nicheWidth * scale}
                height={nicheHeight * scale}
                fill="white"
@@ -37,8 +41,8 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
                strokeWidth={2}
             />
             <Text
-              x={50}
-              y={30}
+              x={nicheX}
+              y={nicheY-20}
               text={`Niche Dimensions: ${nicheWidth}" x ${nicheHeight}"`}
               fontSize={14}
             />
@@ -57,7 +61,7 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
         />
         <Text
           x={screenStartX}
-          y={screenStartY + screenHeight * scale + 7}
+          y={screenStartY + screenHeight * scale + 20}
           text={`Screen Dimensions: ${screenWidth}" x ${screenHeight}"`}
           fontSize={14}
         />
