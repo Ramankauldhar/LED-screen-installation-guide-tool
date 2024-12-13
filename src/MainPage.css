@@ -25,6 +25,7 @@ h2,h3{
 .leftContainer{
     width:80%;
     display: flex;
+    flex-wrap: wrap;
     border: 1px solid rgb(218, 215, 215);
     margin:10px;
 }
@@ -34,16 +35,22 @@ h2,h3{
     margin-left: 0;
 }
 .drawingSection{
-    margin-right: 10px;
-    width:69%;
+    margin-right: 5px;
+    width:68%;
 }
 .drawingSection .drawing{
-    overflow: scroll;
+    display: flex;
+    flex-direction: column; /* Adjust based on orientation */
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    margin: 20px;
+    padding: 10px;
 }
 .centerSection{
     display: block;
-    margin-right:10px;
-    width: 31%;
+    margin-right:0;
+    width: 30%;
 }
 .dimensions-table{
     display: flex;
@@ -208,8 +215,7 @@ h2,h3{
   }
 
 /* Media Queries for Responsiveness */
-
-@media (max-width: 1400px) {
+@media (max-width: 1435px) {
     .leftContainer {
         display: block;
     }

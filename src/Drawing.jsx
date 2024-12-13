@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Stage, Layer, Rect, Text, Line, Arrow } from 'react-konva';
 
 const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHeight }) => {
-  const stageWidth=1100;
-  const stageHeight=600;
-  const scale = 10; // Scaling factor for dimensions
+  const stageWidth=1000;
+  const stageHeight=1120;
+  
+  // Determine scaling factor based on screenWidth
+  const scale = screenWidth > 400 ? 1 : screenWidth > 110 ? 5 : screenWidth > 70 ? 6 : 8;
+
+  // Calculate the center and dimensions dynamically
+  const isVertical = screenHeight > screenWidth;
+  const screenStartX = isVertical ? 60 : 40;
+  const screenStartY = isVertical ? 40 : 60;
 
   // Calculate the center of the screen relative to the canvas
-  const screenStartX = 60; // Starting X position of the screen
-  const screenStartY = 60; // Starting Y position of the screen
   const centerX = screenStartX + (screenWidth * scale) / 2; // Center X of the screen
   const centerY = screenStartY + (screenHeight * scale) / 2; // Center Y of the screen
 
-  // Calculate niche position
+  // Calculate niche positions based on orientation
   const nicheX = screenStartX - ((nicheWidth * scale) - screenWidth * scale) / 2;
   const nicheY = screenStartY - ((nicheHeight * scale) - screenHeight * scale) / 2;
 
@@ -68,7 +73,7 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
 
         {/* Floor Line */}
         <Line
-          points={[40, floorDistance * scale, stageWidth-300, floorDistance * scale]}
+          points={[5, floorDistance * scale, stageWidth-400, floorDistance * scale]}
           stroke="black"
           strokeWidth={1}
         />
@@ -106,7 +111,7 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
         {/* Power Outlet Box */}
         <Rect
           x={outletBoxX}
-          y={outletBoxY}
+          y={outletBoxY-45}
           width={outletBoxWidth}
           height={outletBoxHeight}
           stroke="green"
@@ -120,10 +125,31 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
           fontSize={14}
           fill="green"
         />
+        
+        {/* Arrow for Niche Dimentions */}
+        <Arrow
+          points={[16, nicheY, 16, nicheHeight * scale]} // Niche Dimension Arrow
+          stroke="black"
+          fill="black"
+          strokeWidth={1}
+          pointerLength={10}
+          pointerWidth={10}
+          pointerAtBeginning={true}
+        />  
+        {/* Arrow for Screen Dimentions */}
+        <Arrow
+          points={[nicheWidth+20, screenStartY, centerX, screenStartY + screenHeight * scale]} // Screen Dimension Arrow
+          stroke="black"
+          fill="black"
+          strokeWidth={1}
+          pointerLength={10}
+          pointerWidth={10}
+          pointerAtBeginning={true}
+        />
 
         {/* Black Dashed Arrow from Center of Screen to Floor */}
         <Arrow
-          points={[40, centerY, 40, floorDistance * scale]}
+          points={[5, centerY, 5, floorDistance * scale]}
           stroke="black"
           fill="black"
           strokeWidth={1}
@@ -133,7 +159,7 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
         />
         {/* Length Measurement */}
         <Text
-          x={centerX + 10}
+          x={8}
           y={(screenBottomY + floorDistance * scale) / 2 - 10} // Position text at the middle of the arrow
           text={`Floor Distance: ${floorDistance}"`}
           fontSize={14}

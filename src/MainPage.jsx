@@ -19,7 +19,7 @@ function MainPage() {
     });
     const [orientation, setOrientation] = useState("Horizontal"); // Horizontal or Vertical
     const [installationType, setInstallationType] = useState("Niche"); // Niche or Flat Wall
-    const [floorDistance, setFloorDistance] = useState(50); // Default floor distance in inches
+    const [floorDistance, setFloorDistance] = useState(68); // Default floor distance in inches
     const [nicheDepth, setNicheDepth] = useState(1.5); // Default niche depth in inches
     const [selectedScreen, setSelectedScreen] = useState(""); // Current screen model
     const [screenDimensions, setScreenDimensions] = useState({
@@ -85,8 +85,8 @@ function MainPage() {
 
             if (installationType === "Niche") {
                 const calculatedNicheDimensions = {
-                     height: height + 2 * depthVariance,
-                     width: width + 2 * depthVariance,
+                     height: orientation === "Horizontal" ? parseFloat(height + 2 * depthVariance).toFixed(2) : parseFloat(width + 2 * depthVariance).toFixed(2),
+                     width: orientation === "Horizontal" ? parseFloat(width + 2 * depthVariance).toFixed(2) : parseFloat(height + 2 * depthVariance).toFixed(2),
                      depth: parseFloat(screenDepth + Math.max(mediaPlayerDepth, mountDepth) + depthVariance).toFixed(2),
                 };
                 setNicheDimensions(calculatedNicheDimensions);
@@ -95,7 +95,7 @@ function MainPage() {
             }
         };
         calculateNicheDimensions();
-    }, [screenDimensions, mediaPlayerDepth, mountDepth, installationType]);
+    }, [screenDimensions, mediaPlayerDepth, mountDepth, installationType ,orientation]);
 
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
@@ -134,8 +134,8 @@ function MainPage() {
     };
 
     // Handlers for updating state
-    const handleOrientationToggle = () => {
-          setOrientation((prev) => (prev === "Horizontal" ? "Vertical" : "Horizontal"));
+    const handleOrientationToggle = (newOrientation) => {
+        setOrientation(newOrientation);
     };
     const handleInstallationChange = (event) => {
           setInstallationType(event.target.value);
@@ -155,8 +155,8 @@ return (
         <div className="leftContainer">
              <div className="drawingSection">
                 <Drawing className="drawing"
-                     screenWidth={screenDimensions.width}
-                     screenHeight={screenDimensions.height}
+                     screenWidth={orientation === "Horizontal" ? screenDimensions.width : screenDimensions.height}
+                     screenHeight={orientation === "Horizontal" ? screenDimensions.height : screenDimensions.width}
                      floorDistance={screenDimensions.floorLine}
                      nicheWidth={installationType === "Niche" ? nicheDimensions.width : null}
                      nicheHeight={installationType === "Niche" ? nicheDimensions.height : null}
