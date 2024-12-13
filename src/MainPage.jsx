@@ -26,6 +26,7 @@ function MainPage() {
         height: "",
         width: "",
         floorLine: floorDistance, // Initialize with default floor distance
+        screenDepth: 0,
     });
     const [nicheDimensions, setNicheDimensions] = useState({
         height: 0,
@@ -67,6 +68,7 @@ function MainPage() {
                   height: firstScreen["Height"] || "",
                   width: firstScreen["Width"] || "",
                   floorLine: floorDistance,
+                  screenDepth: firstScreen["Depth"] || 0,
                 });
             }
           } catch (error) {
@@ -75,6 +77,14 @@ function MainPage() {
         };
       
         loadExcelFile();
+    }, []);
+
+    // Effect to update screenDimensions.floorLine when floorDistance changes
+    useEffect(() => {
+        setScreenDimensions(prevDimensions => ({
+            ...prevDimensions,
+            floorLine: floorDistance,
+        }));
     }, [floorDistance]);
 
     useEffect(() => {
@@ -148,6 +158,10 @@ function MainPage() {
         setNicheDepth(event.target.value);
     };
 
+    // Compute display dimensions based on orientation
+    const displayHeight = orientation === "Horizontal" ? screenDimensions.height : screenDimensions.width;
+    const displayWidth = orientation === "Horizontal" ? screenDimensions.width : screenDimensions.height;
+
 return (
 <>
     <div className="header"><img src={signcastLogoImg} alt="signcast-logo"></img></div>
@@ -155,8 +169,8 @@ return (
         <div className="leftContainer">
              <div className="drawingSection">
                 <Drawing className="drawing"
-                     screenWidth={orientation === "Horizontal" ? screenDimensions.width : screenDimensions.height}
-                     screenHeight={orientation === "Horizontal" ? screenDimensions.height : screenDimensions.width}
+                     screenWidth={displayWidth}
+                     screenHeight={displayHeight}
                      floorDistance={screenDimensions.floorLine}
                      nicheWidth={installationType === "Niche" ? nicheDimensions.width : null}
                      nicheHeight={installationType === "Niche" ? nicheDimensions.height : null}
@@ -192,11 +206,11 @@ return (
                         <tbody>
                             <tr>
                                  <th>Height</th>
-                                 <td>{screenDimensions.height || "N/A"}"</td>
+                                 <td>{displayHeight || "N/A"}"</td>
                             </tr>
                             <tr>
                                  <th>Width</th>
-                                 <td>{screenDimensions.width  || "N/A"}"</td>
+                                 <td>{displayWidth || "N/A"}"</td>
                             </tr>
                             <tr>
                                  <th>Floor Line</th>
@@ -245,7 +259,7 @@ return (
                                      <td className="heading">Drawn</td>
                                      <td rowSpan="2" className="heading">Dimensions In Inches</td>
                                      <td rowSpan="2"><img src={revisionImg} alt="revision-img"></img></td>
-                                     <td className="heading">{brand}</td>
+                                     <td className="heading">Screen Size</td>
                                 </tr>
                                 <tr>
                                     <td>SignCast</td>
@@ -260,7 +274,7 @@ return (
                                 <tr>
                                     <td>{date}</td>
                                     <td>1 of 1</td>
-                                    <td>00</td>
+                                    <td>∞</td>
                                     <td>{department}</td>
                                 </tr>
                             </thead>
