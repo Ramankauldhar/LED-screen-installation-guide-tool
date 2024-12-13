@@ -9,7 +9,6 @@ import {downloadPDF} from './downloadPdf';
 function MainPage() {
     const brand = "SignCast";
     const department = "Installation";
-    const [date, setDate] = useState('');
 
     const [dropdownData, setDropdownData] = useState({
         screenModel: [],
@@ -19,7 +18,7 @@ function MainPage() {
     });
     const [orientation, setOrientation] = useState("Horizontal"); // Horizontal or Vertical
     const [installationType, setInstallationType] = useState("Niche"); // Niche or Flat Wall
-    const [floorDistance, setFloorDistance] = useState(68); // Default floor distance in inches
+    const [floorDistance, setFloorDistance] = useState(75); // Default floor distance in inches
     const [nicheDepth, setNicheDepth] = useState(1.5); // Default niche depth in inches
     const [selectedScreen, setSelectedScreen] = useState(""); // Current screen model
     const [screenDimensions, setScreenDimensions] = useState({
@@ -35,6 +34,13 @@ function MainPage() {
     });
     const [mediaPlayerDepth, setMediaPlayerDepth] = useState(0);
     const [mountDepth, setMountDepth] = useState(0);
+
+    //form state management
+    const [title, setTitle] = useState(`${orientation} + PC In ${installationType}`);
+    const [drawer, setDrawer] = useState(brand);
+    const [dept, setDept] = useState(department);
+    const [screenSize, setScreenSize] = useState(`{screenDimentions.width}" Touch Display`);
+    const [date, setDate] = useState("");
 
     useEffect(() => {
         // Function to load and parse the Excel file
@@ -86,6 +92,12 @@ function MainPage() {
             floorLine: floorDistance,
         }));
     }, [floorDistance]);
+
+    // Update screenSize whenever screenDimensions changes
+    useEffect(() => {
+        setScreenSize(`${screenDimensions.width}" Touch Display`);
+    }, [screenDimensions]);
+
 
     useEffect(() => {
         // Calculate niche value dynamically
@@ -249,7 +261,7 @@ return (
                          <address>361 Steelcase RD. W. #1. MARKHAM, ONTARIO PHONE: (416) 900-2233</address>
                          <div className="despText">
                              <label>Description</label>
-                             <p>{`${orientation} + PC In ${installationType}`}</p>
+                             <p>{title}</p>
                          </div>
                     </div>
                     <div className="orderTable">
@@ -262,8 +274,8 @@ return (
                                      <td className="heading">Screen Size</td>
                                 </tr>
                                 <tr>
-                                    <td>SignCast</td>
-                                    <td>LG 55" Touch Display</td>
+                                    <td>{drawer}</td>
+                                    <td>{screenSize}</td>
                                 </tr>
                                 <tr>
                                     <td className="heading">Date</td>
@@ -275,7 +287,7 @@ return (
                                     <td>{date}</td>
                                     <td>1 of 1</td>
                                     <td>∞</td>
-                                    <td>{department}</td>
+                                    <td>{dept}</td>
                                 </tr>
                             </thead>
                         </table>
@@ -375,31 +387,61 @@ return (
                     </div>
                 </div>
             </div>
-            <div className="descriptionSection">
+            <form className="descriptionSection">
                 <div className="items">
                     <h2>Description</h2>
+                    {/* Title */}
                     <div className="item">
-                        <label>Title</label><br />
-                        <input type="text" value={`${orientation} + PC In ${installationType}`}/>
+                         <label htmlFor="title">Title</label><br />
+                         <input 
+                             type="text" 
+                             id="title" 
+                             value={title} 
+                             onChange={(e) => setTitle(e.target.value)} 
+                         />
                     </div>
+                    {/* Drawer */}
                     <div className="item">
-                        <label>Drawer</label><br />
-                        <input type="text" value={brand}/>
+                         <label htmlFor="drawer">Drawer</label><br />
+                         <input 
+                             type="text" 
+                             id="drawer" 
+                             value={drawer} 
+                             onChange={(e) => setDrawer(e.target.value)} 
+                         />
                     </div>
+                    {/* Department */}
                     <div className="item">
-                        <label>Department</label><br />
-                        <input type="text" value={department}/>
+                         <label htmlFor="department">Department</label><br />
+                         <input 
+                             type="text" 
+                             id="department" 
+                             value={dept} 
+                             onChange={(e) => setDept(e.target.value)} 
+                         />
                     </div>
+                    {/* Screen Size */}
                     <div className="item">
-                        <label>Screen Size</label><br />
-                        <input type="text" value={`LG 55" Touch Display`}/>
+                         <label htmlFor="screenSize">Screen Size</label><br />
+                         <input 
+                             type="text" 
+                             id="screenSize" 
+                             value={screenSize} 
+                             onChange={(e) => setScreenSize(e.target.value)} 
+                         />
                     </div>
+                    {/* Date */}
                     <div className="item">
-                        <label>Date</label><br />
-                        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                         <label htmlFor="date">Date</label><br />
+                         <input 
+                             type="date" 
+                             id="date" 
+                             value={date} 
+                             onChange={(e) => setDate(e.target.value)} 
+                         />
                     </div>
                 </div>
-            </div>
+            </form>
             <div className="downloadButtonSection">
                  <button onClick={downloadPDF}>Download</button>
             </div>
