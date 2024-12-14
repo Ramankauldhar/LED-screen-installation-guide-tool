@@ -440,10 +440,10 @@ return (
                          />
                     </div>
                 </div>
-                <div className="downloadButtonSection">
+            </form>
+            <div className="downloadButtonSection">
                  <button onClick={downloadPDF}>Download</button>
             </div>
-            </form>
         </div>
     </div>
 </>
