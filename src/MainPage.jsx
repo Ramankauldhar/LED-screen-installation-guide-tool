@@ -98,9 +98,8 @@ function MainPage() {
         setScreenSize(`${screenDimensions.width}" Touch Display`);
     }, [screenDimensions]);
 
-
+    // Calculate niche value dynamically
     useEffect(() => {
-        // Calculate niche value dynamically
         const calculateNicheDimensions = () => {
             const { height=0, width=0, screenDepth=0 } = screenDimensions;
             const depthVariance = width <= 55 ? 1.5 : 2;

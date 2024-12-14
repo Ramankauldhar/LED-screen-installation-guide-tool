@@ -4,14 +4,16 @@ import { Stage, Layer, Rect, Text, Line, Arrow } from 'react-konva';
 const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHeight }) => {
   const stageWidth=1000;
   const stageHeight=1120;
-  
-  // Determine scaling factor based on screenWidth
-  const scale = screenWidth > 400 ? 1 : screenWidth > 110 ? 5 : screenWidth > 70 ? 6 : 8;
 
   // Calculate the center and dimensions dynamically
   const isVertical = screenHeight > screenWidth;
   const screenStartX = isVertical ? 60 : 40;
   const screenStartY = isVertical ? 40 : 60;
+
+  // Determine scaling factor based on screenWidth
+  const scale = isVertical
+  ? (screenHeight > 400 ? 1 : screenHeight > 110 ? 5 : screenHeight > 70 ? 6 : 8)
+  : (screenWidth > 400 ? 1 : screenWidth > 110 ? 5 : screenWidth > 70 ? 6 : 8);
 
   // Calculate the center of the screen relative to the canvas
   const centerX = screenStartX + (screenWidth * scale) / 2; // Center X of the screen

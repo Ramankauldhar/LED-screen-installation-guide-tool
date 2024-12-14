@@ -44,13 +44,13 @@ h2,h3{
     align-items: center;
     justify-content: center;
     border: 1px solid #ccc;
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
 }
 .centerSection{
     display: block;
-    margin-right:0;
-    width: 30%;
+    margin:0;
+    width: 31%;
 }
 .dimensions-table{
     display: flex;
@@ -60,7 +60,7 @@ h2,h3{
 .dimensions-table table{
     border: 1px solid black;
     height: fit-content;
-    margin: 4px 0;
+    margin: 4px;
     width: 50%;
 }
 .dimensions-table table thead h3{
@@ -218,6 +218,7 @@ h2,h3{
 @media (max-width: 1435px) {
     .leftContainer {
         display: block;
+        width: 100%;
     }
     .header img {
         width: 6rem;
