@@ -203,7 +203,6 @@ h2,h3{
     border-left:none;
     box-sizing: border-box; /* Preventing padding from exceeding width */
   }
-
   .downloadButtonSection button{
     width:100%;
     margin-top: 10px;
@@ -211,7 +210,22 @@ h2,h3{
     background-color: blue;
     color: white;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    border: none;
   }
+  .download-text{
+    width: 80%;
+    border-right: 1px solid white ;
+    text-align: center;
+  }
+
+  .downloadButtonSection .download-icon {
+    margin-left: 8px;
+    align-items: right;
+  }
+  
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1435px) {

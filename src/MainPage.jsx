@@ -85,19 +85,6 @@ function MainPage() {
         loadExcelFile();
     }, []);
 
-    // Effect to update screenDimensions.floorLine when floorDistance changes
-    useEffect(() => {
-        setScreenDimensions(prevDimensions => ({
-            ...prevDimensions,
-            floorLine: floorDistance,
-        }));
-    }, [floorDistance]);
-
-    // Update screenSize whenever screenDimensions changes
-    useEffect(() => {
-        setScreenSize(`${screenDimensions.width}" Touch Display`);
-    }, [screenDimensions]);
-
     // Calculate niche value dynamically
     useEffect(() => {
         const calculateNicheDimensions = () => {
@@ -118,12 +105,30 @@ function MainPage() {
         calculateNicheDimensions();
     }, [screenDimensions, mediaPlayerDepth, mountDepth, installationType ,orientation, nicheDepth]);
 
+    // Effect to update screenDimensions.floorLine when floorDistance changes
+    useEffect(() => {
+        setScreenDimensions(prevDimensions => ({
+            ...prevDimensions,
+            floorLine: floorDistance,
+        }));
+    }, [floorDistance]);
+
+    // Update screenSize whenever screenDimensions changes
+    useEffect(() => {
+        setScreenSize(`${screenDimensions.width}" Touch Display`);
+    }, [screenDimensions]);
+
+    // Update title whenever orientation and installationType updates
+    useEffect(() => {
+        setTitle(`${orientation} + PC In ${installationType}`);
+    }, [orientation, installationType]);
+
     //date
     useEffect(() => {
         const today = new Date().toISOString().split('T')[0];
         setDate(today);
       }, []);
-    
+      
 
     // Update screen dimensions based on the selected screen
     const handleScreenChange = (event) => {
@@ -170,7 +175,7 @@ function MainPage() {
         setNicheDepth(event.target.value);
     };
 
-    // Compute display dimensions based on orientation
+    // Computing display dimensions based on orientation
     const displayHeight = orientation === "Horizontal" ? screenDimensions.height : screenDimensions.width;
     const displayWidth = orientation === "Horizontal" ? screenDimensions.width : screenDimensions.height;
 
@@ -445,7 +450,12 @@ return (
                 </div>
             </form>
             <div className="downloadButtonSection">
-                 <button onClick={downloadPDF}>Download</button>
+                 <button onClick={downloadPDF}>
+                     <span className="download-text">Download</span>
+                     <span className="download-icon">
+                         <i className="fas fa-download"></i>
+                     </span>
+                 </button>
             </div>
         </div>
     </div>

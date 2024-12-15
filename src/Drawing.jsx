@@ -309,17 +309,18 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
           pointerWidth={10}
           pointerAtBeginning={true}
         />
-        <Text
-          x={8}
-          y={stageHeight / 2 - 10}
-          text={`${floorDistance}"`}
-          fontSize={12}
-          fill="grey"
+        <Rect
+          x={8} 
+          y={stageHeight / 2 - 10} 
+          width={26} 
+          height={14} 
+          fill="#f2f2f2"
+          stroke="lightgrey"
         />
         <Text
-          x={8}
-          y={stageHeight / 2 + 10}
-          text={`FD`}
+          x={10}
+          y={stageHeight / 2 - 8}
+          text={`${floorDistance}"`}
           fontSize={12}
           fill="grey"
         />
