@@ -175,7 +175,7 @@ function MainPage() {
     const displayWidth = orientation === "Horizontal" ? screenDimensions.width : screenDimensions.height;
 
 return (
-<>
+<div className="body">
     <div className="header"><img src={signcastLogoImg} alt="signcast-logo"></img></div>
     <div className="mainContainer">
         <div className="leftContainer">
@@ -449,7 +449,7 @@ return (
             </div>
         </div>
     </div>
-</>
+</div>
 );
 }
 export default MainPage;
