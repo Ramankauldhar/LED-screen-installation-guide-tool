@@ -51,13 +51,7 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
                stroke="grey"
                strokeWidth={2}
             />
-            <Text
-               x={nicheX - 55}
-               y={nicheY + (nicheHeight * scale) / 2 - 18}
-               text={`${nicheHeight}"`}
-               fontSize={12}
-               fill="grey"
-            />
+
             {/* Arrow for Niche Height */}
             <Arrow
               points={[
@@ -72,6 +66,39 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
                pointerAtBeginning={true}
                pointerAtEnding={true}
             />  
+            <Line
+              points={[nicheX - 20, nicheY, nicheX - 10, nicheY]} // Top notch
+              stroke="grey"
+              strokeWidth={1}
+            />
+            <Line
+              points={[
+                nicheX - 20,
+                nicheY + nicheHeight * scale,
+                nicheX - 10,
+                nicheY + nicheHeight * scale,
+              ]} // Bottom notch
+              stroke="grey"
+              strokeWidth={1}
+            />
+            {/* Rect for Niche Height Text*/}
+            <Rect
+               x={nicheX - 55 }
+               y={nicheY + (nicheHeight * scale) / 2 - 18 - 5}
+               width={30 + 5 * 2}
+               height={10 + 5 * 2}
+               fill="#f2f2f2"
+               stroke="grey"
+               strokeWidth={1}
+          />
+            <Text
+               x={nicheX - 52}
+               y={nicheY + (nicheHeight * scale) / 2 - 18}
+               text={`${nicheHeight}"`}
+               fontSize={12}
+               fill="grey"
+            />
+
             {/* Arrow for Niche Width */}
             <Arrow
                points={[
@@ -79,20 +106,50 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
                   nicheX + nicheWidth * scale, nicheY + nicheHeight * scale + 20 
                ]}
                stroke="grey"
-               fill="grey"
+               fill="lightgrey"
                strokeWidth={1}
                pointerLength={10}
                pointerWidth={10}
                pointerAtBeginning={true}
                pointerAtEnding={true}
             />
-          <Text
+            <Line
+              points={[
+                nicheX,
+                nicheY + nicheHeight * scale + 15,
+                nicheX,
+                nicheY + nicheHeight * scale + 25,
+              ]} // Left notch
+              stroke="grey"
+              strokeWidth={1}
+            />
+            <Line
+              points={[
+                nicheX + nicheWidth * scale,
+                nicheY + nicheHeight * scale + 15,
+                nicheX + nicheWidth * scale,
+                nicheY + nicheHeight * scale + 25,
+              ]} // Right notch
+              stroke="grey"
+              strokeWidth={1}
+            />
+            {/* Rect for Niche Width Text*/}
+            <Rect
+               x={nicheX + (nicheWidth * scale) / 2 - 20 - 5} 
+               y={nicheY + nicheHeight * scale + 25 - 5} 
+               width={40 + 5 * 2}
+               height={12 + 5 * 2}
+               fill="#f2f2f2" 
+               stroke="grey" 
+               strokeWidth={1} 
+            />
+            <Text
                x={nicheX + (nicheWidth * scale) / 2 - 20} 
                y={nicheY + nicheHeight * scale + 25} 
                text={`${nicheWidth}"`}
                fontSize={12}
                fill="grey"
-          />
+            />
 
           </>
         ) : null}
@@ -107,6 +164,16 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
           fill="white"
           stroke="black"
           strokeWidth={4}
+        />
+        {/* Rect for Screen Height Text*/}
+        <Rect
+           x={screenStartX + screenWidth * scale + 32 - 5} 
+           y={screenStartY + (screenHeight * scale) / 2 - 18 - 5} 
+           width={32 + 5 * 2} 
+           height={10 + 5 * 2}
+           fill="#f2f2f2"
+           stroke="grey" 
+           strokeWidth={1} 
         />
         <Text
           x={screenStartX + screenWidth * scale + 32}
@@ -129,6 +196,26 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
           pointerAtBeginning={true}
           pointerAtEnding={true}
         />  
+        <Line
+          points={[
+            screenStartX + screenWidth * scale + 23,
+            screenStartY,
+            screenStartX + screenWidth * scale + 33,
+            screenStartY,
+          ]} // Top notch
+          stroke="grey"
+          strokeWidth={1}
+        />
+        <Line
+          points={[
+            screenStartX + screenWidth * scale + 23,
+            screenStartY + screenHeight * scale,
+            screenStartX + screenWidth * scale + 33,
+            screenStartY + screenHeight * scale,
+          ]} // Bottom notch
+          stroke="grey"
+          strokeWidth={1}
+        />
         {/* Arrow for Screen Width */}
         <Arrow
            points={[
@@ -136,19 +223,49 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
             screenStartX + screenWidth * scale, screenStartY - 28
            ]}
            stroke="grey"
-           fill="grey"
+           fill="lightgrey"
            strokeWidth={1}
            pointerLength={10}
            pointerWidth={10}
            pointerAtBeginning={true}
            pointerAtEnding={true}
         />
+        <Line
+          points={[
+            screenStartX,
+            screenStartY - 33,
+            screenStartX,
+            screenStartY - 23,
+          ]} // Left notch
+          stroke="grey"
+          strokeWidth={1}
+        />
+        <Line
+          points={[
+            screenStartX + screenWidth * scale,
+            screenStartY - 33,
+            screenStartX + screenWidth * scale,
+            screenStartY - 23,
+          ]} // Right notch
+          stroke="grey"
+          strokeWidth={1}
+        />
+        {/* Rect for Screen Width text */}
+        <Rect
+          x={screenStartX + (screenWidth * scale) / 2 - 30}
+          y={screenStartY - 50} 
+          width={60}
+          height={20}
+          fill="#f2f2f2"
+          stroke="grey"
+          strokeWidth={1}
+        />
         <Text
-           x={screenStartX + (screenWidth * scale) / 2 - 20}
-           y={screenStartY - 40}
-           text={`${screenWidth}"`}
-           fontSize={12}
-           fill="grey"
+          x={screenStartX + (screenWidth * scale) / 2 - 20}
+          y={screenStartY - 44}
+          text={`${screenWidth}"`}
+          fontSize={12}
+          fill="grey"
         />
 
 
@@ -161,11 +278,11 @@ const Drawing = ({ screenWidth, screenHeight, floorDistance, nicheWidth, nicheHe
           fill="grey"
         />
         <Arrow
-           points={[centerX + 60, screenStartY - 60, centerX, centerY]}
-           stroke="lightgrey"
-           fill="lightgrey"
-           pointerLength={10}
-           pointerWidth={10}
+          points={[centerX + 60, screenStartY - 60, centerX, centerY]}
+          stroke="lightgrey"
+          fill="lightgrey"
+          pointerLength={10}
+          pointerWidth={10}
         />
 
         {/* Floor Line */}
