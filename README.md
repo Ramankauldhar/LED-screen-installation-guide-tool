@@ -87,7 +87,7 @@ Utility for exporting the current design as a PDF using libraries such as jsPDF 
 
 ## Testing
 Run unit tests using Jest:
-### `npm test`  
+`npm test`  
 
 ## Contact
 For inquiries or suggestions, please contact:
