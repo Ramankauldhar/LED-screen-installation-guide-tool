@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# LED Screen Installation Guide Tool
+
+This React application provides a user-friendly interface for creating, customizing, and downloading PDF drawings for LED screen installations. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Features: 
 
-In the project directory, you can run:
+1. Dropdown Selection: Choose equipment from a pre-defined list populated via a xlsx file.
+2. Real-Time Diagram Updates: Visual updates for layouts during user interaction.
+3. Measurement Displays: Automatic measurement calculations are displayed on the diagram.
+4. Configuration Options: Toggle settings such as screen orientation and installation type.
+5. Download as PDF: Export your design as a PDF for easy sharing and reference.
 
-### `npm start`
+## File Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+src/  
+│  
+├── imgs/                     # Directory for image assets  
+│  
+├── App.css                   # Global application styles  
+├── App.js                    # Root component for the React application  
+├── App.test.js               # Unit tests for the App component  
+│  
+├── downloadPdf.js            # Utility for exporting diagrams to PDF  
+│  
+├── Drawing.jsx               # Canvas component for interactive design  
+│  
+├── index.css                 # Global CSS for index.html  
+├── index.js                  # Application entry point  
+│  
+├── MainPage.css              # Styles for the MainPage component  
+├── MainPage.jsx              # Main page logic and structure  
+│  
+├── setupTests.js             # Test setup for Jest  
+│  
+└── README.md                 # Project documentation  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
+### Prerequisites
+Ensure you have the following installed:
+1. Node.js (v16 or later)
+2. npm or yarn
 
-### `npm test`
+## Steps
+1. Clone this repository:
+`git clone https://github.com/your-repo/led-screen-guide-tool.git` 
+`cd led-screen-guide-tool`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install dependencies:
+`npm install`
 
-### `npm run build`
+3. Start the application:
+`npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app will run on http://localhost:3000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Navigate to the Main Page: Start designing your layout.
+2. Add Components: Use drag-and-drop to position screen elements.
+3. View Measurements: Measurements update in real time as you adjust the design.
+4. Export PDF: Click "Download" to save the drawing as a PDF.
 
-### `npm run eject`
+## Code Overview
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### App.js
+The root component that wraps the main content.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### MainPage.jsx
+Handles the application layout and connects user inputs to the design canvas.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Drawing.jsx
+Provides an interactive drawing canvas using tools like:
+1. React Konva or Fabric.js for drag-and-drop.
+2. Real-time measurement rendering.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### downloadPdf.js
+Utility for exporting the current design as a PDF using libraries such as jsPDF or html2canvas.
 
-## Learn More
+## Dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. React: UI framework.
+2. React Konva: For interactive and dynamic canvas elements.
+3. jsPDF: For generating PDFs.
+4. HTML2Canvas: For canvas to image conversion.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testing
+Run unit tests using Jest:
+### `npm test`  
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact
+For inquiries or suggestions, please contact:
+Name: Ramandeep
+Email: Rmnkaul979697@gmail.com
